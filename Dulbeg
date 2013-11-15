@@ -1,0 +1,13 @@
+set x to text returned of (display dialog "Sir, Please input your message." buttons {"Avbryt", "Next"} default answer "" with icon note)
+set y to text returned of (display dialog "Repeat how many times?" default answer "" with icon note)
+set z to text returned of (display dialog "Speed - Seconds?" buttons {"Avbryt", "Next"} default answer "" with icon stop)
+display dialog "After this step, the flood will begin in 10 seconds! you'll have to select a target!  Are you sure?" buttons {"Avbryt", "Hit that bitch"}
+tell application "System Events"
+	activate
+	delay 10
+	repeat y times
+		keystroke x
+		delay z
+		keystroke return
+	end repeat
+end tell
