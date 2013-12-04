@@ -1,0 +1,84 @@
+package me.Dexento.BlockChanger;
+
+import java.util.ArrayList;
+import java.util.logging.Logger;
+
+import org.bukkit.ChatColor;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
+import org.bukkit.event.Listener;
+import org.bukkit.plugin.PluginManager;
+import org.bukkit.plugin.java.JavaPlugin;
+
+public class BlockChanger extends JavaPlugin
+{	
+	private static final Logger log = Logger.getLogger("Minecraft");
+	private final BlockChangerListener blocklistener = new BlockChangerListener(this);
+	public final ArrayList<Player> BlockChangerUsers = new ArrayList <Player>();
+	
+	@Override
+	public void onEnable() {
+		
+		log.info("[BlockChanger] by Dexento has been enabled!");{
+		PluginManager pm = getServer().getPluginManager();
+		pm.registerEvents((Listener) this.blocklistener, this);
+		}
+	}
+	
+	@Override
+	public void onDisable() {
+		log.info("[BlockChanger] by Dexento has been disabled!");
+	}
+	
+	@Override
+	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args)
+	{
+		if(commandLabel.equalsIgnoreCase("BlockChanger"))
+			toggleBlockChanger(sender);
+		
+		return false;
+	}
+	
+	private void toggleBlockChanger(CommandSender sender)
+	{
+		if(!enabled((Player) sender) )
+		{
+			BlockChangerUsers.add((Player) sender);
+			((Player) sender).sendMessage(ChatColor.RED + "BlockChanger" + ChatColor.GOLD + "has been" + ChatColor.RED + "enabled" + ChatColor.GOLD + "!");
+		}
+		
+		else
+		{
+			BlockChangerUsers.remove((Player) sender);
+			((Player) sender).sendMessage(ChatColor.RED + "BlockChanger" + ChatColor.GOLD + "has been" + ChatColor.RED + "disabled" + ChatColor.GOLD + "!");
+		}
+	}
+	
+	public boolean enabled(Player player)
+	{
+	
+	
+	
+	//Dette skal åpnes i en ny class;
+	package me.Dexento.BlockChanger;
+
+import org.bukkit.event.block.BlockDamageEvent;
+import org.bukkit.event.Listener;
+
+public class BlockChangerListener extends BlockChanger
+{
+	
+	public static BlockChanger plugin;
+	
+	public BlockChangerListener(BlockChanger instance)
+	{
+		plugin = instance;
+	}
+	
+	public void onBlockDamage(BlockDamageEvent event)
+	{
+		if(plugin.enabled(event.getPlayer()))
+			event.getBlock().setTypeId(4);
+	}
+}
