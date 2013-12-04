@@ -1,4 +1,4 @@
-package me.Dexento.pandora;
+package me.Dexento.Info;
 
 import java.util.logging.Logger;
 
@@ -9,41 +9,38 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public class pandora extends JavaPlugin{
-	public final Logger logger = Logger.getLogger("Minecraft");
-	public static pandora plugin;
-	
-	@Override
-	public void onDisable( ) {
-		PluginDescriptionFile pdfFile = this.getDescription();
-		this.logger.info(pdfFile.getName() + "Has Been Disabled!");
-	}
-	
-	@Override
-	public void onEnable() {
-		PluginDescriptionFile pdfFile = this.getDescription();
-		this.logger.info(pdfFile.getName() + " Version " + pdfFile.getVersion() + "Has Been Enabled!");
+public class Info extends JavaPlugin{
+        public final Logger logger = Logger.getLogger("Minecraft");
+        public static Info plugin;
+        
+        @Override
+        public void onDisable( ) {
+                PluginDescriptionFile pdfFile = this.getDescription();
+                this.logger.info(pdfFile.getName() + "Has Been Disabled!");
+        }
+        
+        @Override
+        public void onEnable() {
+                PluginDescriptionFile pdfFile = this.getDescription();
+                this.logger.info(pdfFile.getName() + " Version " + pdfFile.getVersion() + "Has Been Enabled!");
     }
-	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[]args){
-		Player player = (Player) sender;
-		if(commandLabel.equalsIgnoreCase("sendme")){
-	        player.sendMessage(ChatColor.GOLD + "Dexento Is Awesome!");
-		}
-		return false;
-	}
-}	
-
-
-
+        public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[]args){
+                Player player = (Player) sender;
+                if(commandLabel.equalsIgnoreCase("sendme")){
+                player.sendMessage(ChatColor.GOLD + "Dexento Is Awesome!");
+                }
+                return false;
+        }
+}        
 
 
 plugin.yml
-------------
-name: pandora
-main: me.Dexento.pandora.pandora
+-----------
+name: Info
+main: me.Dexento.Info.Info
 version: 1.0
 description: >
-             Pandora Plugin.
+             Info Plugin.
 commands:
   sendme:
     description: Send The Player A Message!
