@@ -32,3 +32,18 @@ public class pandora extends JavaPlugin{
 		return false;
 	}
 }	
+
+
+
+
+
+plugin.yml
+------------
+name: pandora
+main: me.Dexento.pandora.pandora
+version: 1.0
+description: >
+             Pandora Plugin.
+commands:
+  sendme:
+    description: Send The Player A Message!
