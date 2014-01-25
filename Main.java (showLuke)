@@ -1,0 +1,33 @@
+package com.Dexento.ImpulseMc.Main;
+
+import java.util.logging.Logger;
+
+import org.bukkit.ChatColor;
+import org.bukkit.plugin.PluginManager;
+import org.bukkit.plugin.java.JavaPlugin;
+
+public class Main extends JavaPlugin 
+{
+	public static Main plugin;
+	public final Logger logger = Logger.getLogger("MineCraft");
+	public static String prefix = ChatColor.YELLOW + "[Impulse] ";
+	public static int bcLoop;
+	public static final String noPerm = prefix + ChatColor.RED + "You do not have permission to execute this command!";
+	public final MainListener ml = new MainListener (this);
+	public final Broadcasts bc = new Broadcasts();
+
+	
+	public void onEnable()
+	{
+		this.logger.info("ImpulseMc Plugin Has Been Enabled!");
+	    PluginManager pm = getServer().getPluginManager();
+		pm.registerEvents(bc, this);
+		this.getCommand("fly").setExecutor(new CommandFly(this));
+		this.getCommand("gm").setExecutor(new CommandGm (this));
+	}
+	
+	public void onDisable()
+	{
+		this.logger.info("ImpulseMc Plugin Has Been Disabled!");
+	}
+}
